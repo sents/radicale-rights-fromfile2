@@ -4,6 +4,7 @@ import posixpath
 import re
 from importlib import import_module
 from radicale import storage
+from radicale.rights import BaseRights
 
 
 class Rights(BaseRights):
@@ -47,7 +48,7 @@ class Rights(BaseRights):
             except Exception as e:
                 raise RuntimeError("Error in section %r of rights file %r: "
                                    "%s" % (section, self.filename, e)) from e
-            if user_match and collection_match:
+            if user_match and collection_match and displayname_match:
                 self.logger.debug("Rule %r:%r matches %r:%r from section %r",
                                   user, sane_path, re_user_pattern,
                                   re_collection_pattern, section)
