@@ -16,7 +16,7 @@ class Rights(BaseRights):
     def authorized(self, user, path, permission):
         user = user or ""
         coll = self.Storeclass(path)
-        displayname = coll.get_meta()["D:displayname"]
+        displayname = coll.get_meta().get("D:displayname", "")
         displayname_escaped = re.escape(displayname)
         sane_path = storage.sanitize_path(path).strip("/")
         # Prevent "regex injection"
